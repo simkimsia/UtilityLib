@@ -32,7 +32,7 @@ class NumberLib {
 	* @param integer $precision The number of decimal places to display
 	* @return float Return a newly formatted number
 	**/
-	public function precision($number, $precision = 3) {
+	public static function precision($number, $precision = 3) {
 		$numberHelper = new NumberHelper(new View(new Controller()));
 		return $numberHelper->precision($number, $precision);
 	}
@@ -56,7 +56,7 @@ class NumberLib {
 	*
 	* If a non-recognized $currency value is supplied, it is prepended to a USD formatted number. 
 	**/
-	public function currency($number, $currency= 'USD', $options = array()) {
+	public static function currency($number, $currency= 'USD', $options = array()) {
 		$numberHelper = new NumberHelper(new View(new Controller()));
 		return $numberHelper->currency($number, $currency, $options);		
 	}

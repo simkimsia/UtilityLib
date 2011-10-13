@@ -29,7 +29,7 @@ class HttpLib {
 	* @param integer $timeout The number of seconds before timeout
 	* @return string Returns IP address
 	**/
-	public function getAddrByHost($host, $timeout = 3) {
+	public static function getAddrByHost($host, $timeout = 3) {
 		$host = str_replace('http://', '', $host);
 		
 		$query = `nslookup -timeout=$timeout -retry=1 $host`;

@@ -29,7 +29,7 @@ class StringLib {
 	* @param string $input. Input string.
 	* @return string. If string has either a single quote at front or end, it is returned unchanged.
 	**/
-	public function wrapStringInQuotes($input) {
+	public static function wrapStringInQuotes($input) {
 		$noStartsWithQuote = !self::startsWith($input, "'");
 		$noEndsWithQuote   = !self::endsWith($input, "'");
           
@@ -48,7 +48,7 @@ class StringLib {
 	* @param boolean $recursive. Set true if you want the wrapping to happen at all levels of array. Default false.
 	* @return array. 
 	**/
-	public function iterateArrayWrapStringValuesInQuotes($array, $recursive = false) {
+	public static function iterateArrayWrapStringValuesInQuotes($array, $recursive = false) {
 		foreach($array as $key=>$value) {
 			if (is_array($value) && $recursive) {
 				$array[$key] = self::iterateArrayWrapStringValuesInQuotes($value);
@@ -70,7 +70,7 @@ class StringLib {
 	* @return boolean. Returns true if substring is at beginning of string
 	*
 	**/
-	public function startsWith($haystack,$needle,$case=true) {
+	public static function startsWith($haystack,$needle,$case=true) {
 		if($case){return (strcmp(substr($haystack, 0, strlen($needle)),$needle)===0);}
         return (strcasecmp(substr($haystack, 0, strlen($needle)),$needle)===0);
 	}
@@ -85,7 +85,7 @@ class StringLib {
 	* @return boolean. Returns true if substring is at beginning of string
 	*
 	**/
-	public function endsWith($haystack,$needle,$case=true) {
+	public static function endsWith($haystack,$needle,$case=true) {
         if($case){return (strcmp(substr($haystack, strlen($haystack) - strlen($needle)),$needle)===0);}
         return (strcasecmp(substr($haystack, strlen($haystack) - strlen($needle)),$needle)===0);
 	}
@@ -99,7 +99,7 @@ class StringLib {
 	 * @param string = 0123456789abcdefghijklmnopqrstuvwxyz all possible values
 	 * @return string, the password
 	 */     
-	public function generateRandom ($length = 8, $options = array()) {
+	public static function generateRandom ($length = 8, $options = array()) {
 		// initialize variables
 		$password 	= "";
 		$i 			= 0;

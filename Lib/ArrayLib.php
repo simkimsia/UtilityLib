@@ -27,11 +27,11 @@ class ArrayLib {
 	* @param array $array
 	* @return array
 	**/
-	public function deepKSort(&$array) {
+	public static function deepKSort(&$array) {
 	    ksort($array);
 	    foreach ($array as &$a) {
 	        if (is_array($a) && !empty($a)) {
-	            $this->deepKSort($a);
+	            self::deepKSort($a);
 	        }
 	    }
 	}

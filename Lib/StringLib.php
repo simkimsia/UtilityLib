@@ -135,5 +135,28 @@ class StringLib {
 		}
 		return $password;
 	}
+	
+	/**
+	* generate the string in the email format containing "name" <hello@example.com>
+	*
+	* input is array with the keys as addresses and the names are values
+	**/
+	public static function emailAddressFormat($namesAndAddresses = array()) {
+		if (empty($namesAndAddresses)) {
+			return '';
+		}
+		$result = '';
+		App::uses('Validation', 'Utility');
+		foreach($namesAndAddresses as $email => $name) {
+			if (Validation::email($email) && is_string($name)) {
+				$result .= '"'.$name.'" <' . $email . '>';
+				$result .= ', ';
+			} else if (Validation::email($name)) {
+				$result .= '<' . $name . '>';
+				$result .= ', ';
+			}
+		}
+		return rtrim($result, ', ');
+	}
 }
 ?>

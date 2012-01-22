@@ -158,5 +158,44 @@ class StringLib {
 		}
 		return rtrim($result, ', ');
 	}
+	
+	/**
+	*
+	* returns the string back into email array
+	*
+	* expect "name" <email@example.com> separated by , or ;
+	*
+	**/
+	public static function returnEmailArray($emailString) {
+		App::uses('Validation', 'Utility');
+		
+		$result = array();
+		
+		$emailAddresses = preg_split("/[,;]+/", $emailString);
+		
+		foreach($emailAddresses as $emailAddress) {
+			$emailElements = preg_split("/[<>]+/", $emailAddress);
+			$email = '';
+			$name = '';
+
+			foreach($emailElements as $e) {
+				if (!empty($e)) {
+					if (Validation::email($e)) {
+						$email = $e;
+					} else if (is_string($e)) {
+						$e = str_replace('"', '', $e);
+						$name = rtrim($e, ' ');
+					}
+
+				}
+			}
+			
+			if (!empty($email)) {
+				$result[$email] = $name;
+			}
+		}
+		
+		return $result;
+	}
 }
 ?>

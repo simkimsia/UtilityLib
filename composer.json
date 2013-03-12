@@ -1,5 +1,5 @@
 {
-	"name": "simkimsia/utilitylib",
+	"name": "simkimsia/utility_lib",
 	"type": "cakephp-plugin",
 	"require": {
 		"composer/installers": "~1.0"

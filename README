@@ -4,7 +4,7 @@
 1. Download zip file and unzip to `app/Plugin/UtilityLib`
 2. Pull as a submodule into your app:
 
-	git submodule add git@github.com:simkimsia/UtilityLib.git Plugin/RandomString
+	git submodule add git@github.com:simkimsia/UtilityLib.git Plugin/UtilityLib
 3. Use composer
 
 I assume that your CakePHP application folder is named `app`

@@ -1,9 +1,11 @@
 <?php
 /**
+ * Utility Library is the utility belt of useful functions
+ * http://github.com/simkimsia/UtilityLib/
+ *
  * Array Utility Library
  *
- * This Utility Library is for string manipulation.
- * http://github.com/simkimsia/ArrayUtil
+ * This Utility Library is for array manipulation.
  *
  *
  * Licensed under The MIT License

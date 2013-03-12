@@ -1,9 +1,11 @@
 <?php
 /**
+ * Utility Library is the utility belt of useful functions
+ * http://github.com/simkimsia/UtilityLib/
+ *
  * Http Utility Library
  *
  * This Utility Library allows get ip address by host
- * http://github.com/simkimsia/HttpLib
  *
  *
  * Licensed under The MIT License

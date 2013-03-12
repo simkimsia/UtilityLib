@@ -1,9 +1,12 @@
 <?php
 /**
+ * 
+ * Utility Library is the utility belt of useful functions
+ * http://github.com/simkimsia/UtilityLib/
+ *
  * SaveAll Utility Library
  *
  * This Utility Library is for SaveAll methods
- * http://github.com/simkimsia/UtilLib
  *
  *
  * Licensed under The MIT License

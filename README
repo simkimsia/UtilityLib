@@ -1,0 +1,14 @@
+### Installation
+
+
+1. Download zip file and unzip to `app/Plugin/UtilityLib`
+2. Pull as a submodule into your app:
+
+	git submodule add git@github.com:simkimsia/UtilityLib.git Plugin/RandomString
+3. Use composer
+
+I assume that your CakePHP application folder is named `app`
+
+Read the Wiki on how to use the UtilityLib:
+
+1. StringLib

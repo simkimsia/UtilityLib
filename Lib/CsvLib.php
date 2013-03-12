@@ -1,9 +1,11 @@
 <?php
 /**
- * String Utility Library
+ * Utility Library is the utility belt of useful functions
+ * http://github.com/simkimsia/UtilityLib/
  *
- * This Utility Library is for string manipulation.
- * http://github.com/simkimsia/StringUtil
+ * Csv Utility Library
+ *
+ * This Utility Library is for manipulation for a csv file
  *
  *
  * Licensed under The MIT License

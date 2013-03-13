@@ -40,7 +40,6 @@ class ZipLib {
  */
 	public static function zipFolder($folderPath, $options = array()) {
 		if (!extension_loaded('zip') || !file_exists($folderPath)) {
-			echo 'cannot load zip or folder path does not exist';
 			return false; // should throw exception in future
 		}
 
@@ -67,10 +66,9 @@ class ZipLib {
 
 		$zip = new ZipArchive();
 		if (!$zip->open($destination, ZIPARCHIVE::CREATE)) {
-			echo 'cannot open';
 			return false;
 		}
-		echo 'about to start??';
+
 		if (is_dir($source) === true) {
 			$files = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($source), RecursiveIteratorIterator::SELF_FIRST);
 

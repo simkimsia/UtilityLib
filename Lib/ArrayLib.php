@@ -17,25 +17,38 @@
  * @package app
  * @subpackage app.Lib
  * @filesource
- * @version 0.1
- * @lastmodified 2011-10-03 
+ * @version 0.2
+ * @lastmodified 2013-03-14
  */
 class ArrayLib {
 	
-	/**
-	* 
-	* resursively run the ksort
-	*
-	* @param array $array
-	* @return array
-	**/
+/**
+ * 
+ * resursively run the ksort
+ *
+ * @param array $array
+ * @return array
+ */
 	public static function deepKSort(&$array) {
-	    ksort($array);
-	    foreach ($array as &$a) {
-	        if (is_array($a) && !empty($a)) {
-	            self::deepKSort($a);
-	        }
-	    }
+		ksort($array);
+		foreach ($array as &$a) {
+			if (is_array($a) && !empty($a)) {
+				self::deepKSort($a);
+			}
+		}
+	}
+
+/**
+ * 
+ * insert value at any point inside a numerically indexed array
+ * inspired by http://stackoverflow.com/a/3797526/80353
+ * @param array $data Array to insert $value in
+ * @param int $index Position to insert at. Assumed zero based index.
+ * @param mixed $value  Value to insert array with.
+ * @return array $data array with the new $value inserted.
+ */
+	public static function insert(array $data, int $index, $value) {
+		array_splice( $data, $index, 0, $value); // splice in at position 3
+		return $data;
 	}
 }
-?>

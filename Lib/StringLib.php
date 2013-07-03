@@ -205,55 +205,12 @@ class StringLib {
  *
  * @param $html String The html content
  * @param $prepend String The prepend we expect in front of all the href in css tags
+ * @param $tidy Boolean Optional. Default true. Indicate whether to return clean HTML
  * @return String The new $html content after find and replace. 
  * 
  */
-	public static function prependHrefForCssTags($html, $prepend) {
-		return self::_prependAttrForTags($html, $prepend, 'css');
-	}
-
-/**
- *
- * Take in html content as string and find all the <script src="yada.js" ... >
- * and add $prepend to the src values except when there is http: or https:
- *
- * @param $html String The html content
- * @param $prepend String The prepend we expect in front of all the src in script tags
- * @return String The new $html content after find and replace. 
- * 
- */
-	public static function prependSrcForJsTags($html, $prepend) {
-		return self::_prependAttrForTags($html, $prepend, 'js');
-	}
-
-/**
- *
- * Take in html content as string and find all the <img src="yada.png" ... >
- * and add $prepend to the src values except when there is http: or https:
- *
- * @param $html String The html content
- * @param $prepend String The prepend we expect in front of all the src in img tags
- * @return String The new $html content after find and replace. 
- * 
- */
-	public static function prependSrcForImgTags($html, $prepend) {
-		return self::_prependAttrForTags($html, $prepend, 'img');
-	}
-
-/**
- *
- * Take in html content as string and find all the img, js and css tags
- * and add $prepend to the href/src values except when there is http: or https:
- *
- * @param $html String The html content
- * @param $prepend String The prepend we expect in front of all the href/src in img, js and css tags
- * @return String The new $html content after find and replace. 
- * 
- */
-	public static function prependAttrForAllTags($html, $prepend) {
-		$html = self::prependHrefForCssTags($html, $prepend);
-		$html = self::prependSrcForJsTags($html, $prepend);
-		$html = self::prependSrcForImgTags($html, $prepend);
+	public static function prependHrefForCssTags($html, $prepend, $tidy = true) {
+		$html = self::_prependAttrForTags($html, $prepend, 'css', $tidy);
 		return $html;
 	}
 
@@ -263,16 +220,138 @@ class StringLib {
  * and add $prepend to the src values except when there is http: or https:
  *
  * @param $html String The html content
- * @param $prepend String The prepend we expect in front of all the href in css tags
+ * @param $prepend String The prepend we expect in front of all the src in script tags
+ * @param $tidy Boolean Optional. Default true. Indicate whether to return clean HTML
  * @return String The new $html content after find and replace. 
  * 
  */
-	protected static function _prependAttrForTags($html, $prepend, $tag) {
+	public static function prependSrcForJsTags($html, $prepend, $tidy = true) {
+		$html = self::_prependAttrForTags($html, $prepend, 'js', $tidy);
+		return $html;
+	}
+
+/**
+ *
+ * Take in html content as string and find all the <img src="yada.png" ... >
+ * and add $prepend to the src values except when there is http: or https:
+ *
+ * @param $html String The html content
+ * @param $prepend String The prepend we expect in front of all the src in img tags
+ * @param $tidy Boolean Optional. Default true. Indicate whether to return clean HTML 
+ * @return String The new $html content after find and replace. 
+ * 
+ */
+	public static function prependSrcForImgTags($html, $prepend, $tidy = true) {
+		$html = self::_prependAttrForTags($html, $prepend, 'img', $tidy);
+		return $html;
+	}
+
+/**
+ *
+ * Take in html content assuming it is full page and clean it up with indentation
+ * Assumed to use Tidy 
+ *
+ * @param $html String The html content
+ * @return String Cleaned up $html content.
+ * 
+ */
+	public static function cleanHTMLContent($html) {
+		// Specify configuration
+		$config = array(
+		'show-body-only' => false,
+		'clean' => true,
+		'char-encoding' => 'utf8',
+		'add-xml-decl' => false,
+		'add-xml-space' => true,
+		'output-html' => false,
+		'output-xml' => false,
+		'output-xhtml' => true,
+		'numeric-entities' => false,
+		'ascii-chars' => false,
+		'doctype' => 'strict',
+		'bare' => true,
+		'fix-uri' => true,
+		'indent' => true,
+		'indent-spaces' => 4,
+		'tab-size' => 4,
+		'wrap-attributes' => true,
+		'wrap' => 0,
+		'indent-attributes' => true,
+		'join-classes' => false,
+		'join-styles' => false,
+		'enclose-block-text' => true,
+		'fix-bad-comments' => true,
+		'fix-backslash' => true,
+		'replace-color' => false,
+		'wrap-asp' => false,
+		'wrap-jste' => false,
+		'wrap-php' => false,
+		'write-back' => true,
+		'drop-proprietary-attributes' => false,
+		'hide-comments' => false,
+		'hide-endtags' => false,
+		'literal-attributes' => false,
+		'drop-empty-paras' => true,
+		'enclose-text' => true,
+		'quote-ampersand' => true,
+		'quote-marks' => false,
+		'quote-nbsp' => true,
+		'vertical-space' => true,
+		'wrap-script-literals' => false,
+		'tidy-mark' => false,
+		'merge-divs' => false,
+		'repeated-attributes' => 'keep-last',
+		'break-before-br' => true,
+		);
+
+		// Tidy
+		$tidy = new Tidy();
+		$html = $tidy->repairString($html, $config, 'utf8');
+		return $html;
+	}
+
+/**
+ *
+ * Take in html content as string and find all the img, js and css tags
+ * and add $prepend to the href/src values except when there is http: or https:
+ *
+ * @param $html String The html content
+ * @param $prepend String The prepend we expect in front of all the href/src in img, js and css tags
+ * @param $tidy Boolean Optional. Default true. Indicate whether to return clean HTML
+ * @return String The new $html content after find and replace. 
+ * 
+ */
+	public static function prependAttrForAllTags($html, $prepend, $tidy = true) {
+		$html = self::prependHrefForCssTags($html, $prepend, false);
+		$html = self::prependSrcForJsTags($html, $prepend, false);
+		$html = self::prependSrcForImgTags($html, $prepend, false);
+
+		if ($tidy) {
+			$html = self::cleanHTMLContent($html);
+		}
+
+		return $html;
+	}
+
+/**
+ *
+ * Using PHP's native DOM to solve this.
+ *
+ * Take in html content as string and find all the <script src="yada.js" ... >
+ * and add $prepend to the src values except when there is http: or https:
+ *
+ * @param $html String The html content
+ * @param $prepend String The prepend we expect in front of all the href in css tags
+ * @param $tag String. Acceptable values are img, js, css.
+ * @param $tidy Boolean Optional. Default true. Indicate whether to return clean HTML
+ * @return String The new $html content after find and replace. This is dirty html because we use DOM
+ * 
+ */
+	protected static function _prependAttrForTags($html, $prepend, $tag, $tidy = true) {
 		if ($tag == 'css') {
 			$element = 'link';
 			$attr = 'href';
-		}
-		else if ($tag == 'js') {
+		} else if ($tag == 'js') {
 			$element = 'script';
 			$attr = 'src';
 		}
@@ -284,10 +363,21 @@ class StringLib {
 			// wrong tag so return unchanged
 			return $html;
 		}
-		// this checks for all the "yada.*"
-		$html = preg_replace('/(<'.$element.'\b.+'.$attr.'=")(?!http)([^"]*)(".*>)/', '$1'.$prepend.'$2$3$4', $html);
-		// this checks for all the 'yada.*'
-		$html = preg_replace('/(<'.$element.'\b.+'.$attr.'='."'".')(?!http)([^"]*)('."'".'.*>)/', '$1'.$prepend.'$2$3$4', $html);
+
+		$dom_document = new DOMDocument();
+
+		$dom_document->loadHTML($html);
+		$elements = $dom_document->getElementsByTagName($element);
+		foreach($elements as $singleElement){
+			$attrValue = $singleElement->getAttribute($attr);
+			$singleElement->setAttribute( $attr , $prepend.$attrValue );
+		}
+		$html = $dom_document->saveHTML();
+
+		if ($tidy) {
+			$html = self::cleanHTMLContent($html);
+		}
+
 		return $html;
 	}
 }

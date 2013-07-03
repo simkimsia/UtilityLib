@@ -284,7 +284,11 @@ class StringLib {
 			// wrong tag so return unchanged
 			return $html;
 		}
-		return preg_replace('/(<'.$element.'\b.+'.$attr.'=")(?!http)([^"]*)(".*>)/', '$1'.$prepend.'$2$3$4', $html);
+		// this checks for all the "yada.*"
+		$html = preg_replace('/(<'.$element.'\b.+'.$attr.'=")(?!http)([^"]*)(".*>)/', '$1'.$prepend.'$2$3$4', $html);
+		// this checks for all the 'yada.*'
+		$html = preg_replace('/(<'.$element.'\b.+'.$attr.'='."'".')(?!http)([^"]*)('."'".'.*>)/', '$1'.$prepend.'$2$3$4', $html);
+		return $html;
 	}
 }
 ?>

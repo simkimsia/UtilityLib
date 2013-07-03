@@ -197,5 +197,108 @@ class StringLib {
 		
 		return $result;
 	}
+
+/**
+ *
+ * Take in html content as string and find all the <link href="yada.css" ... >
+ * and add $prepend to the href values except when there is http: or https:
+ *
+ * @param $html String The html content
+ * @param $prepend String The prepend we expect in front of all the href in css tags
+ * @return String The new $html content after find and replace. 
+ * 
+ */
+	public static function prependHrefForCssTags($html, $prepend) {
+		return preg_replace('/(<link\b.+href=")(?!http)([^"]*)(".*>)/', '$1'.$prepend.'$2$3$4', $html);
+	}
+
+/**
+ *
+ * Take in html content as string and find all the <script src="yada.js" ... >
+ * and add $prepend to the src values except when there is http: or https:
+ *
+ * @param $html String The html content
+ * @param $prepend String The prepend we expect in front of all the href in css tags
+ * @return String The new $html content after find and replace. 
+ * 
+ */
+	public static function prependHrefForCssTags($html, $prepend) {
+		return self::_prependAttrForTags($html, $prepend, 'css');
+	}
+
+/**
+ *
+ * Take in html content as string and find all the <script src="yada.js" ... >
+ * and add $prepend to the src values except when there is http: or https:
+ *
+ * @param $html String The html content
+ * @param $prepend String The prepend we expect in front of all the src in script tags
+ * @return String The new $html content after find and replace. 
+ * 
+ */
+	public static function prependSrcForJsTags($html, $prepend) {
+		return self::_prependAttrForTags($html, $prepend, 'js');
+	}
+
+/**
+ *
+ * Take in html content as string and find all the <img src="yada.png" ... >
+ * and add $prepend to the src values except when there is http: or https:
+ *
+ * @param $html String The html content
+ * @param $prepend String The prepend we expect in front of all the src in img tags
+ * @return String The new $html content after find and replace. 
+ * 
+ */
+	public static function prependSrcForImgTags($html, $prepend) {
+		return self::_prependAttrForTags($html, $prepend, 'img');
+	}
+
+/**
+ *
+ * Take in html content as string and find all the img, js and css tags
+ * and add $prepend to the href/src values except when there is http: or https:
+ *
+ * @param $html String The html content
+ * @param $prepend String The prepend we expect in front of all the href/src in img, js and css tags
+ * @return String The new $html content after find and replace. 
+ * 
+ */
+	public static function prependAttrForAllTags($html, $prepend) {
+		$html = self::prependHrefForCssTags($html, $prepend);
+		$html = self::prependSrcForJsTags($html, $prepend);
+		$html = self::prependSrcForImgTags($html, $prepend);
+		return $html;
+	}
+
+/**
+ *
+ * Take in html content as string and find all the <script src="yada.js" ... >
+ * and add $prepend to the src values except when there is http: or https:
+ *
+ * @param $html String The html content
+ * @param $prepend String The prepend we expect in front of all the href in css tags
+ * @return String The new $html content after find and replace. 
+ * 
+ */
+	protected static function _prependAttrForTags($html, $prepend, $tag) {
+		if ($tag == 'css') {
+			$element = 'link';
+			$attr = 'href';
+		}
+		else if ($tag == 'js') {
+			$element = 'script';
+			$attr = 'src';
+		}
+		else if ($tag == 'img') {
+			$element = 'img';
+			$attr = 'src';
+		}
+		else {
+			// wrong tag so return unchanged
+			return $html;
+		}
+		return preg_replace('/(<'.$element.'\b.+'.$attr.'=")(?!http)([^"]*)(".*>)/', '$1'.$prepend.'$2$3$4', $html);
+	}
 }
 ?>

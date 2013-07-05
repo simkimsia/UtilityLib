@@ -268,7 +268,7 @@ class StringLib {
 		'output-xhtml' => true,
 		'numeric-entities' => false,
 		'ascii-chars' => false,
-		'doctype' => 'strict',
+		'doctype' => 'transitional',
 		'bare' => true,
 		'fix-uri' => true,
 		'indent' => true,

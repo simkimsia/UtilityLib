@@ -262,7 +262,7 @@ class StringLib {
 		'clean' => true,
 		'char-encoding' => 'utf8',
 		'add-xml-decl' => false,
-		'add-xml-space' => true,
+		'add-xml-space' => false,
 		'output-html' => false,
 		'output-xml' => false,
 		'output-xhtml' => true,
@@ -380,5 +380,32 @@ class StringLib {
 
 		return $html;
 	}
+
+	public static function replaceCssLinksWithCakeHelper($html, $tidy = true) {
+		$domDoc = new DOMDocument();
+
+		$html = self::cleanHTMLContent($html);
+
+		$domDoc->loadHTML($html);
+		$elements = $domDoc->getElementsByTagName('link');
+		$format = '<?php echo $this->Html->css("%1$s"); ?>';
+		foreach($elements as $singleElement){
+			$attrValue = $singleElement->getAttribute('href');
+			$echo = sprintf($format, $attrValue);
+			debug($echo);
+			$frag = $domDoc->createDocumentFragment();
+			$frag->appendXML($echo);
+			$singleElement->parentNode->replaceChild($frag, $singleElement);
+			//$singleElement->parentNode->replaceChild($echo, $singleElement);
+		}
+		$html = $domDoc->saveHTML();
+
+		if ($tidy) {
+			$html = self::cleanHTMLContent($html);
+		}
+
+		return $html;
+	}
+
 }
 ?>

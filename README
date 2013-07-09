@@ -1,3 +1,6 @@
+### Status
+[![Build Status](https://travis-ci.org/simkimsia/UtilityLib.png)](https://travis-ci.org/simkimsia/UtilityLib)
+
 ### Installation
 
 
@@ -12,3 +15,4 @@ I assume that your CakePHP application folder is named `app`
 Read the Wiki on how to use the UtilityLib:
 
 1. StringLib
+

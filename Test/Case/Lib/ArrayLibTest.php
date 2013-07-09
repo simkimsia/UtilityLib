@@ -24,13 +24,10 @@ App::uses('ArrayLib', 'UtilityLib.Lib');
 class ArrayLibTestCase extends CakeTestCase {
 	public function setUp() {
 		parent::setUp();
-
 	}
 
 	public function tearDown() {
-
 		ClassRegistry::flush();
-		
 		parent::tearDown();
 	}
 	
@@ -70,7 +67,8 @@ class ArrayLibTestCase extends CakeTestCase {
 				 )
 			)
 		);
-		$this->assertEquals(ArrayLib::deepKSort($inputArray), $expected);
+		ArrayLib::deepKSort($inputArray);
+		$this->assertEquals($inputArray, $expected);
 	}
 }
 ?>

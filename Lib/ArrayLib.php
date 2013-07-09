@@ -86,7 +86,7 @@ class ArrayLib {
 	public static function extractIfKeysExist($array, $shouldHaveKeys, &$missingKeys = array()) {
 		// ensure the keys we look for are unique
 		$shouldHaveKeys = array_unique($shouldHaveKeys);
-		$extractedData = array_intersect_key($array, array_flip($shouldHaveKeys)));
+		$extractedData = array_intersect_key($array, array_flip($shouldHaveKeys));
 
 		// extract the keys of $array as an array
 		$keys = array_keys($array);

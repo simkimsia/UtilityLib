@@ -59,6 +59,7 @@ class ZipLib {
 		$ignoreFiles = array_merge($automaticallyIgnoredFiles, $options['ignore_files']);
 
 		$destination = $options['destination'];
+		$include_dir = $options['include_dir'];
 
 		if (file_exists($destination)) {
 			unlink ($destination);

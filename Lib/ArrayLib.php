@@ -116,7 +116,7 @@ class ArrayLib {
 			* Using __FUNCTION__ (Magic constant)
 			* for recursive call
 			*/
-			return array_map(self::objectToArray($d));
+			return array_map( array('ArrayLib','objectToArray') , $d);
 		}
 		else {
 			// Return array

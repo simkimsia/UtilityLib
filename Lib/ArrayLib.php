@@ -139,7 +139,7 @@ class ArrayLib {
 			* Using __FUNCTION__ (Magic constant)
 			* for recursive call
 			*/
-			return (object) array_map(self::arrayToObject($d));
+			return (object) array_map(array('ArrayLib','arrayToObject') , $d);
 		}
 		else {
 			// Return object

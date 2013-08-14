@@ -116,7 +116,7 @@ class ArrayLib {
 			* Using __FUNCTION__ (Magic constant)
 			* for recursive call
 			*/
-			return array_map(self::__FUNCTION__, $d);
+			return array_map(__FUNCTION__, $d);
 		}
 		else {
 			// Return array
@@ -139,7 +139,7 @@ class ArrayLib {
 			* Using __FUNCTION__ (Magic constant)
 			* for recursive call
 			*/
-			return (object) array_map(self::__FUNCTION__, $d);
+			return (object) array_map(__FUNCTION__, $d);
 		}
 		else {
 			// Return object

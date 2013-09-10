@@ -168,11 +168,11 @@ class StringLib {
 **/
 	public static function returnEmailArray($emailString) {
 		App::uses('Validation', 'Utility');
-		
+
 		$result = array();
-		
+
 		$emailAddresses = preg_split("/[,;]+/", $emailString);
-		
+
 		foreach($emailAddresses as $emailAddress) {
 			$emailElements = preg_split("/[<>]+/", $emailAddress);
 			$email = '';
@@ -189,12 +189,12 @@ class StringLib {
 
 				}
 			}
-			
+
 			if (!empty($email)) {
 				$result[$email] = $name;
 			}
 		}
-		
+
 		return $result;
 	}
 
@@ -405,6 +405,20 @@ class StringLib {
 		}
 
 		return $html;
+	}
+
+/**
+ *
+ * Replace newline
+ *
+ * Replace newlines with something else
+ *
+ * @param $subject String The subject we are searching for newlines and replace
+ * @param $replace String The replacement for the newlines
+ * @return String The new subject with the newlines replaced
+ */
+	public static function replaceNewLines($subject, $replace) {
+		return str_replace(["\r\n", "\n\r", "\n", "\r"], $replace, $subject);
 	}
 
 }

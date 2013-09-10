@@ -418,7 +418,7 @@ class StringLib {
  * @return String The new subject with the newlines replaced
  */
 	public static function replaceNewLines($subject, $replace) {
-		return str_replace(["\r\n", "\n\r", "\n", "\r"], $replace, $subject);
+		return str_replace(array("\r\n", "\n\r", "\n", "\r"), $replace, $subject);
 	}
 
 }

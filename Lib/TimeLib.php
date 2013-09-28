@@ -26,9 +26,9 @@
 
 class TimeLib {
 
-	const static MYSQL_DATETIME		= 'MYSQL_DATETIME';
-	const static ISO_8601_DATE		= 'ISO_8601_DATE';
-	const static ISO_8601_DATETIME	= 'ISO_8601_DATETIME';
+	const MYSQL_DATETIME		= 'MYSQL_DATETIME';
+	const ISO_8601_DATE		= 'ISO_8601_DATE';
+	const ISO_8601_DATETIME	= 'ISO_8601_DATETIME';
 /**
  * check whether right now is still not later than a given MySQL datetime value by a specific time interval
  * e.g. nowStillWithin('2013-09-09 00:00:00', '30 minutes') is asking whether right now is it 

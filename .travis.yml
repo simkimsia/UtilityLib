@@ -13,7 +13,7 @@ before_install:
   - sudo apt-get -qq install dnsutils
 
 before_script:
-  - /home/travis/.phpenv/versions/5.3.26/bin/composer.phar self-update
+  - sudo /home/travis/.phpenv/versions/5.3.26/bin/composer.phar self-update
   - sh -c "mysql -e 'CREATE DATABASE cakephp_test;'"
   - git clone git://github.com/cakephp/cakephp ../cakephp && cd ../cakephp && git checkout $CAKE_VERSION
   - cp -R ../UtilityLib plugins/UtilityLib

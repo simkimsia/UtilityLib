@@ -16,13 +16,14 @@
  * @copyright Copyright 2013, Kim Stacks.
  * @link http://stacktogether.com
  * @author Kim Stacks <kim@stacktogether.com>
- * @package app
- * @subpackage app.Lib
+ * @package UtilityLib
+ * @subpackage UtilityLib.Lib
  * @filesource
- * @version 0.3
+ * @version 0.4
  * @license http://www.opensource.org/licenses/mit-license.php The MIT License
- * @lastmodified 2013-07-09
+ * @lastmodified 2013-09-28
  */
+App::uses('Hash', 'Utility');
 class ArrayLib {
 
 /**
@@ -112,10 +113,10 @@ class ArrayLib {
  
 		if (is_array($d)) {
 			/*
-			* Return array converted to object
-			* Using __FUNCTION__ (Magic constant)
-			* for recursive call
-			*/
+		 * Return array converted to object
+		 * Using __FUNCTION__ (Magic constant)
+		 * for recursive call
+		 */
 			return array_map( array('ArrayLib','objectToArray') , $d);
 		}
 		else {
@@ -135,15 +136,74 @@ class ArrayLib {
 	public static function arrayToObject($d) {
 		if (is_array($d)) {
 			/*
-			* Return array converted to object
-			* Using __FUNCTION__ (Magic constant)
-			* for recursive call
-			*/
+		 * Return array converted to object
+		 * Using __FUNCTION__ (Magic constant)
+		 * for recursive call
+		 */
 			return (object) array_map(array('ArrayLib','arrayToObject') , $d);
 		}
 		else {
 			// Return object
 			return $d;
+		}
+	}
+
+/**
+ *
+ * Take in either model.n or n.model and extract a preferred nested format also in
+ either model.n or model.n format
+ * @param $data array of original search results
+ * @param $options array. Keys are:
+  - from Required
+  - to Optional. Default value is the reverse of `from`
+ * @return array Extracted array following the desired to indicated in $options
+ */
+	public static function extractToNest($data, $options = array()) {
+		if (!isset($options['from'])) {
+			throw new Exception('Compulsory to set the `from` in $options', 1);
+		}
+		$dotPositionInFrom	= strpos($options['from'], '.');
+		$nPositionInFrom	= strpos($options['from'], '{n}');
+		$fromLength			= strlen($options['from']);
+		if ($dotPositionInFrom === false || $dotPositionInFrom === 0 || $nPositionInFrom === false) {
+			throw new Exception('Expected `from` in $options to be either {n}.ModelName or ModelName.{n}.' . $options['from'] . 'is neither.', 1);
+		}
+		if (isset($options['to'])) {
+			$dotPosition = strpos($options['to'], '.');
+			$nPositionInTo = strpos($options['to'], '{n}');
+			if ($dotPosition === false || $dotPosition === 0 || $nPositionInTo === false) {
+				throw new Exception('Expected `to` in $options to be either {n}.ModelName or ModelName.{n}.' . $options['to'] . 'is neither.', 1);
+			}
+		} else {
+			// we reverse $options['from'] to derive the $options['to'] if unknown
+			$tokenBeforeDot	= substr($options['from'], 0, $dotPositionInFrom);
+			$tokenAfterDot	= substr($options['from'], $dotPositionInFrom, $fromLength);
+			if ($tokenBeforeDot != '{n}' && $tokenAfterDot != '{n}' ) {
+				throw new Exception('Expected `from` in $options to be either {n}.ModelName or ModelName.{n}.' . $options['from'] . 'is neither.', 1);
+			}
+			$options['to'] = "$tokenAfterDot.$tokenBeforeDot";
+			$nPositionInTo = strpos($options['to'], '{n}');
+		}
+		$destinationFormatIsNDotModel	= ($nPositionInTo === 0);
+		$destinationFormatIsModelDotN	= ($nPositionInTo > 0);
+		$sourceFormatIsNDotModel		= ($nPositionInFrom === 0);
+		$sourceFormatIsModelDotN		= ($nPositionInFrom > 0);
+		$toLength						= strlen($options['to']);
+
+		if ($destinationFormatIsNDotModel) {
+			$destinationModelName	= substr($options['to'], $nPositionInTo, $toLength);
+			$results				= Hash::map($data, $options['from'], function($child) use ($destinationModelName) {
+				return array($destinationModelName => $child);
+			});
+			return $results;
+		}
+		if ($destinationFormatIsModelDotN) {
+			$destinationModelName			= substr($options['to'], 0, $nPositionInTo);
+			$results						= array($destinationModelName => array());
+			$results[$destinationModelName]	= Hash::map($data, $options['from'], function($child) use ($destinationModelName) {
+				return $child;
+			});
+			return $results;
 		}
 	}
 

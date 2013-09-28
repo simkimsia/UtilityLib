@@ -191,14 +191,14 @@ class ArrayLib {
 		$toLength						= strlen($options['to']);
 
 		if ($destinationFormatIsNDotModel) {
-			$destinationModelName	= substr($options['to'], $nPositionInTo, $toLength);
+			$destinationModelName	= substr($options['to'], $dotPosition + 1);
 			$results				= Hash::map($data, $options['from'], function($child) use ($destinationModelName) {
 				return array($destinationModelName => $child);
 			});
 			return $results;
 		}
 		if ($destinationFormatIsModelDotN) {
-			$destinationModelName			= substr($options['to'], 0, $nPositionInTo);
+			$destinationModelName			= substr($options['to'], 0, $dotPosition);
 			$results						= array($destinationModelName => array());
 			$results[$destinationModelName]	= Hash::map($data, $options['from'], function($child) use ($destinationModelName) {
 				return $child;

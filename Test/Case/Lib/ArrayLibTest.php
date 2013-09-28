@@ -68,7 +68,7 @@ class ArrayLibTestCase extends CakeTestCase {
 			)
 		);
 		ArrayLib::deepKSort($inputArray);
-		$this->assertEquals($inputArray, $expected);
+		$this->assertEquals($expected, $inputArray);
 	}
 
 /**
@@ -117,18 +117,24 @@ class ArrayLibTestCase extends CakeTestCase {
 		// test 1. model.n to n.model
 		$options	= array('from' => 'Article.{n}', 'to' => '{n}.Article');
 		$output		= ArrayLib::extractToNest($data, $options);
-		$this->assertEquals($output, $expected);
+		$this->assertEquals($expected, $output);
 
 		$data = array(
-			'Article' => array(
-				'id' => 1, 'title' => 'ABC', 'body' => 'Long Story'
+			array(
+				'Article' => array(
+					'id' => 1, 'title' => 'ABC', 'body' => 'Long Story'
+				)
 			),
-			'Article' => array(
-				'id' => 2, 'title' => 'DEF', 'body' => 'I wrote this Song'
+			array(
+				'Article' => array(
+					'id' => 2, 'title' => 'DEF', 'body' => 'I wrote this Song'
+				),
 			),
-			'Article' => array(
-				'id' => 3, 'title' => 'GHI', 'body' => 'My Way'
-			),
+			array(
+				'Article' => array(
+					'id' => 3, 'title' => 'GHI', 'body' => 'My Way'
+				),
+			)
 		);
 
 		$expected = array(
@@ -142,36 +148,48 @@ class ArrayLibTestCase extends CakeTestCase {
 		// test 2. n.model to model.n
 		$options	= array('from' => '{n}.Article', 'to' => 'Article.{n}');
 		$output		= ArrayLib::extractToNest($data, $options);
-		$this->assertEquals($output, $expected);
+		$this->assertEquals($expected, $output);
 
 		$data = array(
-			'Article' => array(
-				'id' => 1, 'title' => 'ABC', 'body' => 'Long Story'
+			array(
+				'Article' => array(
+					'id' => 1, 'title' => 'ABC', 'body' => 'Long Story'
+				)
 			),
-			'Article' => array(
-				'id' => 2, 'title' => 'DEF', 'body' => 'I wrote this Song'
+			array(
+				'Article' => array(
+					'id' => 2, 'title' => 'DEF', 'body' => 'I wrote this Song'
+				),
 			),
-			'Article' => array(
-				'id' => 3, 'title' => 'GHI', 'body' => 'My Way'
-			),
+			array(
+				'Article' => array(
+					'id' => 3, 'title' => 'GHI', 'body' => 'My Way'
+				),
+			)
 		);
 
 		$expected = array(
-			'Post' => array(
-				'id' => 1, 'title' => 'ABC', 'body' => 'Long Story'
+			array(
+				'Post' => array(
+					'id' => 1, 'title' => 'ABC', 'body' => 'Long Story'
+				)
 			),
-			'Post' => array(
-				'id' => 2, 'title' => 'DEF', 'body' => 'I wrote this Song'
+			array(
+				'Post' => array(
+					'id' => 2, 'title' => 'DEF', 'body' => 'I wrote this Song'
+				),
 			),
-			'Post' => array(
-				'id' => 3, 'title' => 'GHI', 'body' => 'My Way'
-			),
+			array(
+				'Post' => array(
+					'id' => 3, 'title' => 'GHI', 'body' => 'My Way'
+				),
+			)
 		);
 
 		// test 3. n.model1 to n.model2
 		$options	= array('from' => '{n}.Article', 'to' => '{n}.Post');
 		$output		= ArrayLib::extractToNest($data, $options);
-		$this->assertEquals($output, $expected);
+		$this->assertEquals($expected, $output);
 	}
 }
 ?>

@@ -10,11 +10,11 @@
  * Licensed under The MIT License
  * Redistributions of files must retain the above copyright notice.
  *
- * @copyright Copyright 2011, Sim Kim Sia
- * @link http://simkimsia.com
- * @author Sim Kim Sia (kimcity@gmail.com)
- * @package app
- * @subpackage app.Test.Case.Lib
+ * @copyright Copyright 2011-2013, Kim Stacks.
+ * @link http://stacktogether.com
+ * @author Kim Stacks <kim@stacktogether.com>
+ * @package UtilityLib
+ * @subpackage UtilityLib.Test.Case.Lib
  * @filesource
  * @version 0.1
  * @lastmodified 2011-10-03 
@@ -22,47 +22,43 @@
 App::uses('StringLib', 'UtilityLib.Lib');
 
 class StringLibTestCase extends CakeTestCase {
-	
+
 	public function setUp() {
-		
 		parent::setUp();
-		//ClassRegistry::init('UtilityLib.StringLib');
 	}
 
 	public function tearDown() {
-		
 		ClassRegistry::flush();
-		
 		parent::tearDown();
 	}
-	
-	/**
-	* 
-	* test function wrapStringInQuotes 
-	*
-	* @return void
-	**/
+
+/**
+ * 
+ * test function wrapStringInQuotes 
+ *
+ * @return void
+ */
 	public function testWrapStringInQuotes() {
 		// starts with quotes. expect no change
 		$input = '\'happy';
 		$this->assertEquals(StringLib::wrapStringInQuotes($input), $input);
-		
+
 		// ends with quotes. expect no change
 		$input = 'happy\'';
 		$this->assertEquals(StringLib::wrapStringInQuotes($input), $input);
-		
+
 		// ends with quotes. expect no change
 		$input 		= 'happy';
 		$expected 	= '\'happy\'';
 		$this->assertEquals(StringLib::wrapStringInQuotes($input), $expected);		
 	}
 
-	/**
-	* 
-	* test function iterateArrayWrapStringValuesInQuotes
-	*
-	* @return void
-	**/
+/**
+ * 
+ * test function iterateArrayWrapStringValuesInQuotes
+ *
+ * @return void
+ */
 	public function testIterateArrayWrapStringValuesInQuotes() {
 		// empty array, no change
 		$input = array();
@@ -80,11 +76,11 @@ class StringLibTestCase extends CakeTestCase {
 	}
 	
 	/**
-	* 
-	* test function startsWith
-	*
-	* @return void
-	**/
+ * 
+ * test function startsWith
+ *
+ * @return void
+ **/
 	public function testStartsWith() {
 
 		$this->assertTrue(StringLib::startsWith('hello kitty', 'hell', true));
@@ -101,11 +97,11 @@ class StringLibTestCase extends CakeTestCase {
 	}	
 	
 	/**
-	* 
-	* test function endsWith
-	*
-	* @return void
-	**/
+ * 
+ * test function endsWith
+ *
+ * @return void
+ **/
 	public function testEndsWith() {
 		$this->assertTrue(StringLib::endsWith('hello kitty', 'tty', true));
 		

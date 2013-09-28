@@ -7,32 +7,35 @@
  *
  * This Utility Library is for manipulation for a csv file
  *
+ * Copyright 2013, Kim Stacks
+ * Singapore
  *
  * Licensed under The MIT License
  * Redistributions of files must retain the above copyright notice.
  *
- * @copyright Copyright 2011, Sim Kim Sia
- * @link http://simkimsia.com
- * @author Sim Kim Sia (kimcity@gmail.com)
- * @package app
- * @subpackage app.Lib
+ * @copyright Copyright 2011-2013, Kim Stacks.
+ * @link http://stacktogether.com
+ * @author Kim Stacks <kim@stacktogether.com>
+ * @package UtilityLib
+ * @subpackage UtilityLib.Lib
  * @filesource
  * @version 0.1
+ * @license http://www.opensource.org/licenses/mit-license.php The MIT License
  * @lastmodified 2012-02-04
  */
 
 class CsvLib {
-	
+
 	const QUOTE = "\"";
 	const ESCAPED_QUOTE = "\"\"";
 	const CHARACTERS_THAT_MUST_BE_QUOTED = '/[,"\n]/';
-	
+
 	/**
-	*
-	* escapes a given string for csv file
-	* @param string $s
-	* @return string
-	**/
+ *
+ * escapes a given string for csv file
+ * @param string $s
+ * @return string
+ **/
 	public static function escape( $s ) {
 		if ( strpos($s, self::QUOTE) !==false) {
 			$s = str_replace(self::QUOTE, self::ESCAPED_QUOTE, $s);
@@ -45,11 +48,11 @@ class CsvLib {
 	}
 
 	/**
-	*
-	* unescapes a given string from csv file
-	* @param string $s
-	* @return string
-	**/	
+ *
+ * unescapes a given string from csv file
+ * @param string $s
+ * @return string
+ **/	
 	public static function unescape( $s ) {
 
 		require_once('StringLib.php');

@@ -10,11 +10,11 @@
  * Licensed under The MIT License
  * Redistributions of files must retain the above copyright notice.
  *
- * @copyright Copyright 2011, Sim Kim Sia
- * @link http://simkimsia.com
- * @author Sim Kim Sia (kimcity@gmail.com)
- * @package app
- * @subpackage app.Test.Case.Lib
+ * @copyright Copyright 2011-2013, Kim Stacks.
+ * @link http://stacktogether.com
+ * @author Kim Stacks <kim@stacktogether.com>
+ * @package UtilityLib
+ * @subpackage UtilityLib.Test.Case.Lib
  * @filesource
  * @version 0.1
  * @lastmodified 2011-10-03 
@@ -22,26 +22,21 @@
 App::uses('HttpLib', 'UtilityLib.Lib');
 
 class HttpLibTestCase extends CakeTestCase {
-	
 	public function setUp() {
-		
 		parent::setUp();
-		//ClassRegistry::init('UtilityLib.StringLib');
 	}
 
 	public function tearDown() {
-		
 		ClassRegistry::flush();
-		
 		parent::tearDown();
 	}
-	
-	/**
-	* 
-	* test function getAddrByHost 
-	*
-	* @return void
-	**/
+
+/**
+ * 
+ * test function getAddrByHost 
+ *
+ * @return void
+ */
 	public function testGetAddrByHost() {
 		// test using google.com
 		$host = 'google.com';

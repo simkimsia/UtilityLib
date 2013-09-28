@@ -108,10 +108,11 @@ class ArrayLibTestCase extends CakeTestCase {
 					'id' => 2, 'title' => 'DEF', 'body' => 'I wrote this Song'
 				),
 			),
+			array(
 				'Article' => array(
 					'id' => 3, 'title' => 'GHI', 'body' => 'My Way'
 				),
-			),
+			)
 		);
 		// test 1. model.n to n.model
 		$options	= array('from' => 'Article.{n}', 'to' => '{n}.Article');

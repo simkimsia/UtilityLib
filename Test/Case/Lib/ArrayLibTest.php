@@ -150,7 +150,7 @@ class ArrayLibTestCase extends CakeTestCase {
 			),
 		);
 
-		$data = array(
+		$expected = array(
 			'Post' => array(
 				'id' => 1, 'title' => 'ABC', 'body' => 'Long Story'
 			),

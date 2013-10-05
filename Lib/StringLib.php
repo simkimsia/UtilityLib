@@ -17,8 +17,8 @@
  * @package app
  * @subpackage app.Lib
  * @filesource
- * @version 0.2
- * @lastmodified 2013-03-12 
+ * @version 0.3
+ * @lastmodified 2013-10-05
  */
 class StringLib {
 
@@ -419,6 +419,20 @@ class StringLib {
  */
 	public static function replaceNewLines($subject, $replace) {
 		return str_replace(array("\r\n", "\n\r", "\n", "\r"), $replace, $subject);
+	}
+
+/**
+ *
+ * Count occurences of newlines in a long string
+ * taken from http://stackoverflow.com/a/7955446/80353
+ *
+ * @param $subject String The subject we are searching for newlines
+ * @return int 
+ */
+	public static function countNewLines($subject) {
+		$lines_arr = preg_split('/\r\n|\n\r|\n|\r/',$subject);
+		$num_newlines = count($lines_arr); 
+		return $num_newlines;
 	}
 
 }

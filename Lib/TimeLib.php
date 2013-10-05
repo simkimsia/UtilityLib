@@ -78,7 +78,7 @@ class TimeLib {
 		// currently only works from MYSQL_DATETIME to ISO_8601_DATETIME
 		$date = substr($value, 0, 10); // we should get 3133-01-07
 		$time = substr($value, 11, 5); // we should get back 17:49
-		return "$dateT$timeZ";
+		return $date . 'T' . $time . 'Z';
 	}
 
 }

@@ -436,7 +436,9 @@ class StringLib {
 /**
  *
  * Explode string using newline as delimiter.
- * Note that empty lines are also removed
+ * Note that empty lines are also removed.
+ *
+ * Taken from http://stackoverflow.com/questions/3997336/explode-php-string-by-new-line#comment13603554_3997367
  *
  * @param $subject String The subject we are going to explode with
  * @return Array The array of lines

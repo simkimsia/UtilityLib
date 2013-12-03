@@ -4,7 +4,7 @@
  *
  * This Utility Library is for string manipulation.
  * http://github.com/simkimsia/StringUtil
- * 
+ *
  * Test case written for Cakephp 2.0
  *
  * Licensed under The MIT License
@@ -15,9 +15,7 @@
  * @author Kim Stacks <kim@stacktogether.com>
  * @package UtilityLib
  * @subpackage UtilityLib.Test.Case.Lib
- * @filesource
  * @version 0.2
- * @lastmodified 2013-10-05
  */
 App::uses('StringLib', 'UtilityLib.Lib');
 
@@ -33,8 +31,8 @@ class StringLibTestCase extends CakeTestCase {
 	}
 
 /**
- * 
- * test function wrapStringInQuotes 
+ *
+ * test function wrapStringInQuotes
  *
  * @return void
  */
@@ -50,11 +48,11 @@ class StringLibTestCase extends CakeTestCase {
 		// ends with quotes. expect no change
 		$input 		= 'happy';
 		$expected 	= '\'happy\'';
-		$this->assertEquals(StringLib::wrapStringInQuotes($input), $expected);		
+		$this->assertEquals(StringLib::wrapStringInQuotes($input), $expected);
 	}
 
 /**
- * 
+ *
  * test function iterateArrayWrapStringValuesInQuotes
  *
  * @return void
@@ -76,7 +74,7 @@ class StringLibTestCase extends CakeTestCase {
 	}
 
 /**
- * 
+ *
  * test function startsWith
  *
  * @return void
@@ -96,7 +94,7 @@ class StringLibTestCase extends CakeTestCase {
 	}
 
 /**
- * 
+ *
  * test function endsWith
  *
  * @return void
@@ -116,7 +114,7 @@ class StringLibTestCase extends CakeTestCase {
 	}
 
 /**
- * 
+ *
  * test function replaceNewLines
  *
  * @return void
@@ -135,7 +133,7 @@ class StringLibTestCase extends CakeTestCase {
 	}
 
 /**
- * 
+ *
  * test function countNewLines
  *
  * @return void
@@ -150,6 +148,34 @@ class StringLibTestCase extends CakeTestCase {
 		// THEN we expect 5 lines.
 		// WHY? because we count the line after the return carriage at end of line 4 as another line
 		$expected = 5;
+		$this->assertEquals($result, $expected);
+	}
+
+/**
+ *
+ * test function explodeByNewLines
+ *
+ * @return void
+ */
+	public function testExplodeByNewLines() {
+		// GIVEN the following $subject
+		$subject = "This is line 1\r\n\r\n\r\nThis is line 2\n\rThis is line 3\rThis is line 4\n";
+
+		// WHEN we run the explodeByNewLines
+		$result = StringLib::explodeByNewLines($subject);
+
+		// THEN we expect 4 lines.
+		// WHY? because empty lines are removed
+		$expected = 4;
+		$this->assertEquals(count($result), $expected);
+
+		// AND the result is as follows
+		$expected = [
+			"This is line 1",
+			"This is line 2",
+			"This is line 3",
+			"This is line 4"
+		];
 		$this->assertEquals($result, $expected);
 	}
 

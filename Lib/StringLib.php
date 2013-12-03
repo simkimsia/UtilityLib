@@ -11,19 +11,17 @@
  * Licensed under The MIT License
  * Redistributions of files must retain the above copyright notice.
  *
- * @copyright Copyright 2011, Sim Kim Sia
- * @link http://simkimsia.com
- * @author Sim Kim Sia (kimcity@gmail.com)
- * @package app
- * @subpackage app.Lib
- * @filesource
+ * @copyright Copyright 2011-2013, Kim Stacks.
+ * @link http://stacktogether.com
+ * @author Kim Stacks <kim@stacktogether.com>
+ * @package UtilityLib
+ * @subpackage UtilityLib.Lib
  * @version 0.3
- * @lastmodified 2013-10-05
  */
 class StringLib {
 
 /**
-* 
+*
 * Checks input string does NOT have single quotes at the beginning and at the end.
 * Wraps it in single quotes.
 * E.g., $input is string. Returns 'string'
@@ -42,12 +40,12 @@ class StringLib {
 	}
 
 /**
-* 
+*
 * Takes input array and wraps every value-string in single quotes where applicable.a
 *
 * @param array $array. Input array.
 * @param boolean $recursive. Set true if you want the wrapping to happen at all levels of array. Default false.
-* @return array. 
+* @return array.
 **/
 	public static function iterateArrayWrapStringValuesInQuotes($array, $recursive = false) {
 		foreach($array as $key=>$value) {
@@ -61,7 +59,7 @@ class StringLib {
 	}
 
 /**
-* 
+*
 * Looks inside a string and checks if it STARTS with a substring. Works for case-sensitive and case-insensitive
 *
 * @param string $haystack. The string to be searched.
@@ -76,7 +74,7 @@ class StringLib {
 	}
 
 /**
-* 
+*
 * Looks inside a string and checks if it ENDS with a substring. Works for case-sensitive and case-insensitive
 *
 * @param string $haystack. The string to be searched.
@@ -128,7 +126,7 @@ class StringLib {
 			$char = substr($possible, mt_rand(0, strlen($possible)-1), 1);
 
 			// we don't want this character if it's already in the password
-			if (!strstr($password, $char)) { 
+			if (!strstr($password, $char)) {
 				$password .= $char;
 				$i++;
 			}
@@ -206,8 +204,8 @@ class StringLib {
  * @param $html String The html content
  * @param $prepend String The prepend we expect in front of all the href in css tags
  * @param $tidy Boolean Optional. Default true. Indicate whether to return clean HTML
- * @return String The new $html content after find and replace. 
- * 
+ * @return String The new $html content after find and replace.
+ *
  */
 	public static function prependHrefForCssTags($html, $prepend, $tidy = true) {
 		$html = self::_prependAttrForTags($html, $prepend, 'css', $tidy);
@@ -222,8 +220,8 @@ class StringLib {
  * @param $html String The html content
  * @param $prepend String The prepend we expect in front of all the src in script tags
  * @param $tidy Boolean Optional. Default true. Indicate whether to return clean HTML
- * @return String The new $html content after find and replace. 
- * 
+ * @return String The new $html content after find and replace.
+ *
  */
 	public static function prependSrcForJsTags($html, $prepend, $tidy = true) {
 		$html = self::_prependAttrForTags($html, $prepend, 'js', $tidy);
@@ -237,9 +235,9 @@ class StringLib {
  *
  * @param $html String The html content
  * @param $prepend String The prepend we expect in front of all the src in img tags
- * @param $tidy Boolean Optional. Default true. Indicate whether to return clean HTML 
- * @return String The new $html content after find and replace. 
- * 
+ * @param $tidy Boolean Optional. Default true. Indicate whether to return clean HTML
+ * @return String The new $html content after find and replace.
+ *
  */
 	public static function prependSrcForImgTags($html, $prepend, $tidy = true) {
 		$html = self::_prependAttrForTags($html, $prepend, 'img', $tidy);
@@ -249,11 +247,11 @@ class StringLib {
 /**
  *
  * Take in html content assuming it is full page and clean it up with indentation
- * Assumed to use Tidy 
+ * Assumed to use Tidy
  *
  * @param $html String The html content
  * @return String Cleaned up $html content.
- * 
+ *
  */
 	public static function cleanHTMLContent($html) {
 		// Specify configuration
@@ -318,8 +316,8 @@ class StringLib {
  * @param $html String The html content
  * @param $prepend String The prepend we expect in front of all the href/src in img, js and css tags
  * @param $tidy Boolean Optional. Default true. Indicate whether to return clean HTML
- * @return String The new $html content after find and replace. 
- * 
+ * @return String The new $html content after find and replace.
+ *
  */
 	public static function prependAttrForAllTags($html, $prepend, $tidy = true) {
 		$html = self::prependHrefForCssTags($html, $prepend, false);
@@ -345,7 +343,7 @@ class StringLib {
  * @param $tag String. Acceptable values are img, js, css.
  * @param $tidy Boolean Optional. Default true. Indicate whether to return clean HTML
  * @return String The new $html content after find and replace. This is dirty html because we use DOM
- * 
+ *
  */
 	protected static function _prependAttrForTags($html, $prepend, $tag, $tidy = true) {
 		if ($tag == 'css') {
@@ -427,12 +425,24 @@ class StringLib {
  * taken from http://stackoverflow.com/a/7955446/80353
  *
  * @param $subject String The subject we are searching for newlines
- * @return int 
+ * @return int
  */
 	public static function countNewLines($subject) {
 		$lines_arr = preg_split('/\r\n|\n\r|\n|\r/',$subject);
-		$num_newlines = count($lines_arr); 
+		$num_newlines = count($lines_arr);
 		return $num_newlines;
+	}
+
+/**
+ *
+ * Explode string using newline as delimiter.
+ * Note that empty lines are also removed
+ *
+ * @param $subject String The subject we are going to explode with
+ * @return Array The array of lines
+ */
+	public static function explodeByNewLines($subject) {
+		return preg_split('/\n|\r/', $subject, -1, PREG_SPLIT_NO_EMPTY);
 	}
 
 }

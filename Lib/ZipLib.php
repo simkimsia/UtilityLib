@@ -114,7 +114,7 @@ class ZipLib {
 				file_put_contents($file_name, $fstream );
 				// Set the rights
 				chmod($file_name, 0777);
-				echo "save: ".$file_name."<br />";
+				//echo "save: ".$file_name."<br />";
 				}
 				
 				// Close the entry

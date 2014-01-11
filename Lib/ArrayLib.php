@@ -27,7 +27,7 @@ App::uses('Hash', 'Utility');
 class ArrayLib {
 
 /**
- * 
+ *
  * resursively run the ksort
  *
  * @param array $array
@@ -43,7 +43,7 @@ class ArrayLib {
 	}
 
 /**
- * 
+ *
  * insert value at any point inside a numerically indexed array
  * inspired by http://stackoverflow.com/a/3797526/80353
  * @param array $data Array to insert $value in
@@ -58,7 +58,7 @@ class ArrayLib {
 
 /**
  * Check the keys of an array against a list of values. Returns true if all values in the list
- is not in the array as a key. Returns false otherwise.
+ * is not in the array as a key. Returns false otherwise.
  *
  * @param $array Associative array with keys and values
  * @param $mustHaveKeys Array whose values contain the keys that MUST exist in $array
@@ -110,7 +110,7 @@ class ArrayLib {
 			// with get_object_vars function
 			$d = get_object_vars($d);
 		}
- 
+
 		if (is_array($d)) {
 			/*
 		 * Return array converted to object
@@ -118,8 +118,7 @@ class ArrayLib {
 		 * for recursive call
 		 */
 			return array_map( array('ArrayLib','objectToArray') , $d);
-		}
-		else {
+		} else {
 			// Return array
 			return $d;
 		}

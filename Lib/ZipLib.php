@@ -110,12 +110,11 @@ class ZipLib {
 						// Get the content of the zip entry
 						$fstream = zip_entry_read($zip_entry, zip_entry_filesize($zip_entry));
 
-						$finfo = finfo_open(FILEINFO_MIME_TYPE);
-						$mimetype = finfo_file($finfo, $file_name);
-						echo $mimetype;
-						file_put_contents($file_name, $fstream);
-						// Set the rights
-						chmod($file_name, 0777);
+						if (!empty($fstream)) {
+							file_put_contents($file_name, $fstream);
+							// Set the rights
+							chmod($file_name, 0777);
+						}
 						//echo "save: ".$file_name."<br />";
 					}
 

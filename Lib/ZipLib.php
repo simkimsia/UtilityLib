@@ -43,15 +43,15 @@ class ZipLib {
 			return false; // should throw exception in future
 		}
 
-		$source				= str_replace('\\', '/', realpath($folderPath));
-		$sourceDir			= dirname($source);
-		$defaultDestination		= $sourceDir . '/' . basename($folderPath) . '.zip';
-		$automaticallyIgnoredFiles	= array('.', '..', '.DS_Store');
+		$source = str_replace('\\', '/', realpath($folderPath));
+		$sourceDir = dirname($source);
+		$defaultDestination = $sourceDir . '/' . basename($folderPath) . '.zip';
+		$automaticallyIgnoredFiles = array('.', '..', '.DS_Store');
 
 		$defaultOptions = array(
-			'destination'	=> $defaultDestination,
-			'include_dir'	=> true,
-			'ignore_files'	=> array()
+			'destination' => $defaultDestination,
+			'include_dir' => true,
+			'ignore_files' => array()
 		);
 
 		$options = array_merge($defaultOptions, $options);
@@ -65,6 +65,45 @@ class ZipLib {
 			unlink ($destination);
 		}
 
+		$zip = new ZipArchive();
+		if (!$zip->open($destination, ZIPARCHIVE::CREATE)) {
+			return false;
+		}
+
+		if (is_dir($source) === true) {
+			$files = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($source), RecursiveIteratorIterator::SELF_FIRST);
+
+			if ($include_dir) {
+				$arr = explode("/",$source);
+				$maindir = $arr[count($arr)- 1];
+				$source = "";
+				for ($i=0; $i < count($arr) - 1; $i++) {
+					$source .= '/' . $arr[$i];
+				}
+				$source = substr($source, 1);
+				$zip->addEmptyDir($maindir);
+			}
+
+			foreach ($files as $file) {
+				$file = str_replace('\\', '/', $file);
+
+				// purposely ignore files that are irrelevant
+				if( in_array(substr($file, strrpos($file, '/')+1), $ignoreFiles) )
+					continue;
+
+				$file = realpath($file);
+
+				if (is_dir($file) === true) {
+						$zip->addEmptyDir(str_replace($source . '/', '', $file . '/'));
+				} elseif (is_file($file) === true) {
+					$zip->addFromString(str_replace($source . '/', '', $file), file_get_contents($file));
+				}
+			}// end foreach
+		} else if (is_file($source) === true) {
+				$zip->addFromString(basename($source), file_get_contents($source));
+		}
+
+		return $zip->close();
 	}
 
 

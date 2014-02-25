@@ -127,22 +127,30 @@ class ZipLib {
 			// Create the directories to the destination dir if they don't already exist
 			self::create_dirs($dest_dir);
 
+			$ignoredEntries = array('.DS_Store', '__MACOSX/');
+
 			// For every file in the zip-packet
 			while ($zip_entry = zip_read($zip)) {
 				// Now we're going to create the directories in the destination directories
 
+				$name = zip_entry_name($zip_entry);
+				$ignoreThisEntry = in_array($name, $ignoredEntries);
+
+				if ($ignoreThisEntry) {
+					continue;
+				}
 				// If the file is not in the root dir
-				$pos_last_slash = strrpos(zip_entry_name($zip_entry), "/");
+				$pos_last_slash = strrpos($name, "/");
 				if ($pos_last_slash !== false)
 				{
 					// Create the directory where the zip-entry should be saved (with a "/" at the end)
-					self::create_dirs($dest_dir.substr(zip_entry_name($zip_entry), 0, $pos_last_slash+1));
+					self::create_dirs($dest_dir.substr($name, 0, $pos_last_slash+1));
 				}
 
 				// Open the entry
 				if (zip_entry_open($zip,$zip_entry,"r")) {
 					// The name of the file to save on the disk
-					$file_name = $dest_dir.zip_entry_name($zip_entry);
+					$file_name = $dest_dir.$name;
 
 					// Check if the files should be overwritten or not
 					if ($overwrite === true || ($overwrite === false && !file_exists($file_name)) ) {

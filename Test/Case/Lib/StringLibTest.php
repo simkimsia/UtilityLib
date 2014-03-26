@@ -194,6 +194,18 @@ class StringLibTestCase extends CakeTestCase {
 		// off the word
 		$expected = "Word1 Word2";
 		$this->assertEquals($expected, $result);
+
+		// GIVEN the following $subject
+		$subject = "another test comic";
+
+		// WHEN we run the substrToLastWord
+		$result = StringLib::substrToLastWord($subject, 30);
+
+		// THEN we expect Word1 Word2
+		// WHY? because character limit at position 13 is ! but it cuts
+		// off the word
+		$expected = "another test comic";
+		$this->assertEquals($expected, $result);
 	}
 
 }

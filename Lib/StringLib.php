@@ -469,7 +469,10 @@ class StringLib {
  * @return Array The array of lines
  */
 	public static function substrToLastWord($subject, $characterLimit) {
-		return preg_replace('/\s+?(\S+)?$/', '', substr($subject, 0, $characterLimit));
+		if (strlen($subject) > $characterLimit) {
+			return preg_replace('/\s+?(\S+)?$/', '', substr($subject, 0, $characterLimit));
+		}
+		return $subject;
 	}
 
 }

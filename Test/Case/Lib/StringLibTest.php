@@ -1,22 +1,22 @@
 <?php
 /**
- * String Utility Library Test Case
- *
- * This Utility Library is for string manipulation.
- * http://github.com/simkimsia/StringUtil
- *
- * Test case written for Cakephp 2.0
- *
- * Licensed under The MIT License
- * Redistributions of files must retain the above copyright notice.
- *
- * @copyright Copyright 2011-2013, Kim Stacks.
- * @link http://stacktogether.com
- * @author Kim Stacks <kim@stacktogether.com>
- * @package UtilityLib
- * @subpackage UtilityLib.Test.Case.Lib
- * @version 0.2
- */
+  * String Utility Library Test Case
+  *
+  * This Utility Library is for string manipulation.
+  * http://github.com/simkimsia/StringUtil
+  *
+  * Test case written for Cakephp 2.0
+  *
+  * Licensed under The MIT License
+  * Redistributions of files must retain the above copyright notice.
+  *
+  * @copyright Copyright 2011-2013, Kim Stacks.
+  * @link http://stacktogether.com
+  * @author Kim Stacks <kim@stacktogether.com>
+  * @package UtilityLib
+  * @subpackage UtilityLib.Test.Case.Lib
+  * @version 0.2
+  */
 App::uses('StringLib', 'UtilityLib.Lib');
 
 class StringLibTestCase extends CakeTestCase {
@@ -31,11 +31,11 @@ class StringLibTestCase extends CakeTestCase {
 	}
 
 /**
- *
- * test function wrapStringInQuotes
- *
- * @return void
- */
+  *
+  * test function wrapStringInQuotes
+  *
+  * @return void
+  */
 	public function testWrapStringInQuotes() {
 		// starts with quotes. expect no change
 		$input = '\'happy';
@@ -52,11 +52,11 @@ class StringLibTestCase extends CakeTestCase {
 	}
 
 /**
- *
- * test function iterateArrayWrapStringValuesInQuotes
- *
- * @return void
- */
+  *
+  * test function iterateArrayWrapStringValuesInQuotes
+  *
+  * @return void
+  */
 	public function testIterateArrayWrapStringValuesInQuotes() {
 		// empty array, no change
 		$input = array();
@@ -74,11 +74,11 @@ class StringLibTestCase extends CakeTestCase {
 	}
 
 /**
- *
- * test function startsWith
- *
- * @return void
- **/
+  *
+  * test function startsWith
+  *
+  * @return void
+  **/
 	public function testStartsWith() {
 		$this->assertTrue(StringLib::startsWith('hello kitty', 'hell', true));
 
@@ -94,11 +94,11 @@ class StringLibTestCase extends CakeTestCase {
 	}
 
 /**
- *
- * test function endsWith
- *
- * @return void
- */
+  *
+  * test function endsWith
+  *
+  * @return void
+  */
 	public function testEndsWith() {
 		$this->assertTrue(StringLib::endsWith('hello kitty', 'tty', true));
 
@@ -114,11 +114,11 @@ class StringLibTestCase extends CakeTestCase {
 	}
 
 /**
- *
- * test function replaceNewLines
- *
- * @return void
- */
+  *
+  * test function replaceNewLines
+  *
+  * @return void
+  */
 	public function testReplaceNewLines() {
 		// GIVEN the following $subject and $replace
 		$subject = "This is line 1\r\nThis is line 2\n\rThis is line 3\rThis is line 4\n";
@@ -133,11 +133,11 @@ class StringLibTestCase extends CakeTestCase {
 	}
 
 /**
- *
- * test function countNewLines
- *
- * @return void
- */
+  *
+  * test function countNewLines
+  *
+  * @return void
+  */
 	public function testCountNewLines() {
 		// GIVEN the following $subject
 		$subject = "This is line 1\r\nThis is line 2\n\rThis is line 3\rThis is line 4\n";
@@ -152,11 +152,11 @@ class StringLibTestCase extends CakeTestCase {
 	}
 
 /**
- *
- * test function explodeByNewLines
- *
- * @return void
- */
+  *
+  * test function explodeByNewLines
+  *
+  * @return void
+  */
 	public function testExplodeByNewLines() {
 		// GIVEN the following $subject
 		$subject = "This is line 1\r\n\r\n\r\nThis is line 2\n\rThis is line 3\rThis is line 4\n";
@@ -167,7 +167,7 @@ class StringLibTestCase extends CakeTestCase {
 		// THEN we expect 4 lines.
 		// WHY? because empty lines are removed
 		$expected = 4;
-		$this->assertEquals(count($result), $expected);
+		$this->assertEquals($expected, count($result));
 
 		// AND the result is as follows
 		$expected = [
@@ -176,7 +176,27 @@ class StringLibTestCase extends CakeTestCase {
 			"This is line 3",
 			"This is line 4"
 		];
-		$this->assertEquals($result, $expected);
+		$this->assertEquals($expected, $result);
+	}
+
+/**
+  *
+  * test function substrToLastWord
+  *
+  * @return void
+  */
+	public function testSubstrToLastWord() {
+		// GIVEN the following $subject
+		$subject = "Word1 Word2 ~!@#$%^&*()_+=-`1234567890";
+
+		// WHEN we run the substrToLastWord
+		$result = StringLib::substrToLastWord($subject, 14);
+
+		// THEN we expect Word1 Word2
+		// WHY? because character limit at position 13 is ! but it cuts
+		// off the word
+		$expected = "Word1 Word2";
+		$this->assertEquals($expected, $result);
 	}
 
 }

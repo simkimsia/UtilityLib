@@ -21,37 +21,37 @@
 class StringLib {
 
 /**
-*
-* Checks input string does NOT have single quotes at the beginning and at the end.
-* Wraps it in single quotes.
-* E.g., $input is string. Returns 'string'
-*
-* @param string $input. Input string.
-* @return string. If string has either a single quote at front or end, it is returned unchanged.
-**/
+ *
+ * Checks input string does NOT have single quotes at the beginning and at the end.
+ * Wraps it in single quotes.
+ * E.g., $input is string. Returns 'string'
+ *
+ * @param string $input. Input string.
+ * @return string. If string has either a single quote at front or end, it is returned unchanged.
+ */
 	public static function wrapStringInQuotes($input) {
 		$noStartsWithQuote = !self::startsWith($input, "'");
-		$noEndsWithQuote   = !self::endsWith($input, "'");
+		$noEndsWithQuote = !self::endsWith($input, "'");
 
-		if ($noStartsWithQuote AND $noEndsWithQuote) {
-				return "'" . $input . "'";
+		if ($noStartsWithQuote && $noEndsWithQuote) {
+			return "'" . $input . "'";
 		}
 		return $input;
 	}
 
 /**
-*
-* Takes input array and wraps every value-string in single quotes where applicable.a
-*
-* @param array $array. Input array.
-* @param boolean $recursive. Set true if you want the wrapping to happen at all levels of array. Default false.
-* @return array.
-**/
+ *
+ * Takes input array and wraps every value-string in single quotes where applicable.a
+ *
+ * @param array $array. Input array.
+ * @param boolean $recursive. Set true if you want the wrapping to happen at all levels of array. Default false.
+ * @return array.
+ */
 	public static function iterateArrayWrapStringValuesInQuotes($array, $recursive = false) {
-		foreach($array as $key=>$value) {
+		foreach ($array as $key => $value) {
 			if (is_array($value) && $recursive) {
 				$array[$key] = self::iterateArrayWrapStringValuesInQuotes($value);
-			} elseif (is_string($value) OR is_numeric($value)) {
+			} elseif (is_string($value) || is_numeric($value)) {
 				$array[$key] = self::wrapStringInQuotes($value);
 			}
 		}
@@ -59,33 +59,37 @@ class StringLib {
 	}
 
 /**
-*
-* Looks inside a string and checks if it STARTS with a substring. Works for case-sensitive and case-insensitive
-*
-* @param string $haystack. The string to be searched.
-* @param string $needle. The substring we are searching at the front
-* @param boolean $case. Set to true if case-sensitive search is required
-* @return boolean. Returns true if substring is at beginning of string
-*
-**/
-	public static function startsWith($haystack,$needle,$case=true) {
-		if($case){return (strcmp(substr($haystack, 0, strlen($needle)),$needle)===0);}
-		return (strcasecmp(substr($haystack, 0, strlen($needle)),$needle)===0);
+ *
+ * Looks inside a string and checks if it STARTS with a substring. Works for case-sensitive and case-insensitive
+ *
+ * @param string $haystack. The string to be searched.
+ * @param string $needle. The substring we are searching at the front
+ * @param boolean $case. Set to true if case-sensitive search is required
+ * @return boolean. Returns true if substring is at beginning of string
+ *
+ */
+	public static function startsWith($haystack, $needle, $case = true) {
+		if ($case) {
+			return (strcmp(substr($haystack, 0, strlen($needle)), $needle) === 0);
+		}
+		return (strcasecmp(substr($haystack, 0, strlen($needle)), $needle) === 0);
 	}
 
 /**
-*
-* Looks inside a string and checks if it ENDS with a substring. Works for case-sensitive and case-insensitive
-*
-* @param string $haystack. The string to be searched.
-* @param string $needle. The substring we are searching at the end.
-* @param boolean $case. Set to true if case-sensitive search is required
-* @return boolean. Returns true if substring is at beginning of string
-*
-**/
-	public static function endsWith($haystack,$needle,$case=true) {
-		if($case){return (strcmp(substr($haystack, strlen($haystack) - strlen($needle)),$needle)===0);}
-		return (strcasecmp(substr($haystack, strlen($haystack) - strlen($needle)),$needle)===0);
+ *
+ * Looks inside a string and checks if it ENDS with a substring. Works for case-sensitive and case-insensitive
+ *
+ * @param string $haystack. The string to be searched.
+ * @param string $needle. The substring we are searching at the end.
+ * @param boolean $case. Set to true if case-sensitive search is required
+ * @return boolean. Returns true if substring is at beginning of string
+ *
+ */
+	public static function endsWith($haystack, $needle, $case = true) {
+		if ($case) {
+			return (strcmp(substr($haystack, strlen($haystack) - strlen($needle)), $needle) === 0);
+		}
+		return (strcasecmp(substr($haystack, strlen($haystack) - strlen($needle)), $needle) === 0);
 	}
 
 /**
@@ -97,25 +101,25 @@ class StringLib {
  * @param string = 0123456789abcdefghijklmnopqrstuvwxyz all possible values
  * @return string, the password
  */
-	public static function generateRandom ($length = 8, $options = array()) {
+	public static function generateRandom($length = 8, $options = array()) {
 		// initialize variables
-		$password 	= "";
-		$i 			= 0;
-		$possible 	= '';
+		$password = "";
+		$i = 0;
+		$possible = '';
 
 		$numerals = '0123456789';
 		$lowerAlphabet = 'a$bcdefghijklmnopqrstuvwxyz';
 		$upperAlphabet = strtoupper($lowerAlphabet);
 
-		$defaultOptions = array('type'=>'alphanumeric', 'case'=>'mixed');
+		$defaultOptions = array('type' => 'alphanumeric', 'case' => 'mixed');
 
 		$options = array_merge($defaultOptions, $options);
 
 		if ($options['type'] == 'alphanumeric') {
 			$possible = $numerals;
-			if ($options['case'] == 'lower' OR $options['case'] == 'mixed') {
+			if ($options['case'] == 'lower' || $options['case'] == 'mixed') {
 				$possible .= $lowerAlphabet;
-			} elseif ($options['case'] == 'upper' OR $options['case'] == 'mixed') {
+			} elseif ($options['case'] == 'upper' || $options['case'] == 'mixed') {
 				$possible .= $upperAlphabet;
 			}
 		}
@@ -123,7 +127,7 @@ class StringLib {
 		// add random characters to $password until $length is reached
 		while ($i < $length) {
 			// pick a random character from the possible ones
-			$char = substr($possible, mt_rand(0, strlen($possible)-1), 1);
+			$char = substr($possible, mt_rand(0, strlen($possible) - 1), 1);
 
 			// we don't want this character if it's already in the password
 			if (!strstr($password, $char)) {
@@ -135,21 +139,21 @@ class StringLib {
 	}
 
 /**
-* generate the string in the email format containing "name" <hello@example.com>
-*
-* input is array with the keys as addresses and the names are values
-**/
+ * generate the string in the email format containing "name" <hello@example.com>
+ *
+ * input is array with the keys as addresses and the names are values
+ */
 	public static function emailAddressFormat($namesAndAddresses = array()) {
 		if (empty($namesAndAddresses)) {
 			return '';
 		}
 		$result = '';
 		App::uses('Validation', 'Utility');
-		foreach($namesAndAddresses as $email => $name) {
+		foreach ($namesAndAddresses as $email => $name) {
 			if (Validation::email($email) && is_string($name)) {
-				$result .= '"'.$name.'" <' . $email . '>';
+				$result .= '"' . $name . '" <' . $email . '>';
 				$result .= ', ';
-			} else if (Validation::email($name)) {
+			} elseif (Validation::email($name)) {
 				$result .= '<' . $name . '>';
 				$result .= ', ';
 			}
@@ -158,12 +162,12 @@ class StringLib {
 	}
 
 /**
-*
-* returns the string back into email array
-*
-* expect "name" <email@example.com> separated by , or ;
-*
-**/
+ *
+ * returns the string back into email array
+ *
+ * expect "name" <email@example.com> separated by , or ;
+ *
+ */
 	public static function returnEmailArray($emailString) {
 		App::uses('Validation', 'Utility');
 
@@ -171,16 +175,16 @@ class StringLib {
 
 		$emailAddresses = preg_split("/[,;]+/", $emailString);
 
-		foreach($emailAddresses as $emailAddress) {
+		foreach ($emailAddresses as $emailAddress) {
 			$emailElements = preg_split("/[<>]+/", $emailAddress);
 			$email = '';
 			$name = '';
 
-			foreach($emailElements as $e) {
+			foreach ($emailElements as $e) {
 				if (!empty($e)) {
 					if (Validation::email($e)) {
 						$email = $e;
-					} else if (is_string($e)) {
+					} elseif (is_string($e)) {
 						$e = str_replace('"', '', $e);
 						$name = rtrim($e, ' ');
 					}
@@ -349,15 +353,13 @@ class StringLib {
 		if ($tag == 'css') {
 			$element = 'link';
 			$attr = 'href';
-		} else if ($tag == 'js') {
+		} elseif ($tag == 'js') {
 			$element = 'script';
 			$attr = 'src';
-		}
-		else if ($tag == 'img') {
+		} elseif ($tag == 'img') {
 			$element = 'img';
 			$attr = 'src';
-		}
-		else {
+		} else {
 			// wrong tag so return unchanged
 			return $html;
 		}
@@ -366,7 +368,7 @@ class StringLib {
 
 		$dom_document->loadHTML($html);
 		$elements = $dom_document->getElementsByTagName($element);
-		foreach($elements as $singleElement){
+		foreach ($elements as $singleElement) {
 			$attrValue = $singleElement->getAttribute($attr);
 			$singleElement->setAttribute( $attr , $prepend.$attrValue );
 		}
@@ -379,6 +381,15 @@ class StringLib {
 		return $html;
 	}
 
+/**
+ *
+ * replace css links
+ *
+ * @param $html String The html content
+ * @param $tidy boolean True default
+ * @return String The new $html content after find and replace. This is dirty html because we use DOM
+ *
+ */
 	public static function replaceCssLinksWithCakeHelper($html, $tidy = true) {
 		$domDoc = new DOMDocument();
 
@@ -387,7 +398,7 @@ class StringLib {
 		$domDoc->loadHTML($html);
 		$elements = $domDoc->getElementsByTagName('link');
 		$format = '<?php echo $this->Html->css("%1$s"); ?>';
-		foreach($elements as $singleElement){
+		foreach ($elements as $singleElement) {
 			$attrValue = $singleElement->getAttribute('href');
 			$echo = sprintf($format, $attrValue);
 			debug($echo);
@@ -445,6 +456,20 @@ class StringLib {
  */
 	public static function explodeByNewLines($subject) {
 		return preg_split('/\n|\r/', $subject, -1, PREG_SPLIT_NO_EMPTY);
+	}
+
+/**
+ *
+ * Explode string using newline as delimiter.
+ * Note that empty lines are also removed.
+ *
+ * Taken from http://stackoverflow.com/questions/3997336/explode-php-string-by-new-line#comment13603554_3997367
+ *
+ * @param $subject String The subject we are going to explode with
+ * @return Array The array of lines
+ */
+	public static function substrToLastWord($subject, $characterLimit) {
+		return preg_replace('/\s+?(\S+)?$/', '', substr($subject, 0, $characterLimit));
 	}
 
 }

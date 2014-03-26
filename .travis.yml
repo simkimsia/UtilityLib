@@ -11,7 +11,6 @@ env:
 before_install:
   - sudo apt-get -qq update
   - sudo apt-get -qq install dnsutils
-  - php /home/travis/.phpenv/versions/5.3.26/bin/composer.phar self-update
 
 before_script:
   - sh -c "mysql -e 'CREATE DATABASE cakephp_test;'"

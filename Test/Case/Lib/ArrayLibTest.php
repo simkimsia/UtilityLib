@@ -2,9 +2,8 @@
 /**
  * Array Utility Library Test Case
  *
- * This Utility Library is for string manipulation.
- * http://github.com/simkimsia/ArrayUtil
- * 
+ * http://github.com/simkimsia/UtilityLib
+ *
  * Test case written for Cakephp 2.0
  *
  * Licensed under The MIT License
@@ -16,15 +15,12 @@
  * @package UtilityLib
  * @subpackage UtilityLib.Test.Case.Lib
  * @filesource
- * @version 0.4
+ * @version 0.1
  * @lastmodified 2013-09-28
  */
 App::uses('ArrayLib', 'UtilityLib.Lib');
 
 class ArrayLibTestCase extends CakeTestCase {
-	public function setUp() {
-		parent::setUp();
-	}
 
 	public function tearDown() {
 		ClassRegistry::flush();
@@ -32,8 +28,8 @@ class ArrayLibTestCase extends CakeTestCase {
 	}
 
 /**
- * 
- * test function deepKSort 
+ *
+ * test function deepKSort
  *
  * @return void
  */
@@ -44,12 +40,12 @@ class ArrayLibTestCase extends CakeTestCase {
 			'b' => array('b'),
 			'c' => array(
 				'ca' => array(
-					'cap' => array('captain', 'capsize'), 
+					'cap' => array('captain', 'capsize'),
 					'cam' => array('camera')
-				), 
+				),
 				'ce' => array(
 					'cel' => array('cellar', 'celery')
-				 )
+				)
 			)
 		);
 
@@ -61,10 +57,10 @@ class ArrayLibTestCase extends CakeTestCase {
 				'ca' => array(
 					'cam' => array('camera'),
 					'cap' => array('captain', 'capsize')
-				), 
+				),
 				'ce' => array(
 					'cel' => array('cellar', 'celery')
-				 )
+				)
 			)
 		);
 		ArrayLib::deepKSort($inputArray);
@@ -72,8 +68,8 @@ class ArrayLibTestCase extends CakeTestCase {
 	}
 
 /**
- * 
- * test function extractToNest 
+ *
+ * test function extractToNest
  *
  * @return void
  */
@@ -192,4 +188,3 @@ class ArrayLibTestCase extends CakeTestCase {
 		$this->assertEquals($expected, $output);
 	}
 }
-?>

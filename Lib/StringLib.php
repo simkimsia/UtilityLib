@@ -364,15 +364,15 @@ class StringLib {
 			return $html;
 		}
 
-		$dom_document = new DOMDocument();
+		$domDocument = new DOMDocument();
 
-		$dom_document->loadHTML($html);
-		$elements = $dom_document->getElementsByTagName($element);
+		$domDocument->loadHTML($html);
+		$elements = $domDocument->getElementsByTagName($element);
 		foreach ($elements as $singleElement) {
 			$attrValue = $singleElement->getAttribute($attr);
-			$singleElement->setAttribute( $attr , $prepend.$attrValue );
+			$singleElement->setAttribute($attr, $prepend . $attrValue );
 		}
-		$html = $dom_document->saveHTML();
+		$html = $domDocument->saveHTML();
 
 		if ($tidy) {
 			$html = self::cleanHTMLContent($html);
@@ -439,9 +439,9 @@ class StringLib {
  * @return int
  */
 	public static function countNewLines($subject) {
-		$lines_arr = preg_split('/\r\n|\n\r|\n|\r/',$subject);
-		$num_newlines = count($lines_arr);
-		return $num_newlines;
+		$linesArr = preg_split('/\r\n|\n\r|\n|\r/',$subject);
+		$numNewlines = count($linesArr);
+		return $numNewlines;
 	}
 
 /**
@@ -473,4 +473,3 @@ class StringLib {
 	}
 
 }
-?>

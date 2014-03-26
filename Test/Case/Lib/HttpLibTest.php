@@ -2,9 +2,8 @@
 /**
  * Http Utility Library Test Case
  *
- * This Utility Library is for http manipulation.
- * http://github.com/simkimsia/StringUtil
- * 
+ * http://github.com/simkimsia/UtilityLib
+ *
  * Test case written for Cakephp 2.0
  *
  * Licensed under The MIT License
@@ -17,14 +16,11 @@
  * @subpackage UtilityLib.Test.Case.Lib
  * @filesource
  * @version 0.1
- * @lastmodified 2011-10-03 
+ * @lastmodified 2013-09-28
  */
 App::uses('HttpLib', 'UtilityLib.Lib');
 
 class HttpLibTestCase extends CakeTestCase {
-	public function setUp() {
-		parent::setUp();
-	}
 
 	public function tearDown() {
 		ClassRegistry::flush();
@@ -32,8 +28,8 @@ class HttpLibTestCase extends CakeTestCase {
 	}
 
 /**
- * 
- * test function getAddrByHost 
+ *
+ * test function getAddrByHost
  *
  * @return void
  */
@@ -49,4 +45,3 @@ class HttpLibTestCase extends CakeTestCase {
 	}
 
 }
-?>

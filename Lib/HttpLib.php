@@ -27,8 +27,8 @@ class HttpLib {
 
 /**
  *
- * Returns IP address based on domain host. 
- * 
+ * Returns IP address based on domain host.
+ *
  * @param string $host The domain. Eg, www.abc.com
  * @param integer $timeout The number of seconds before timeout
  * @return string Returns IP address
@@ -36,9 +36,9 @@ class HttpLib {
 	public static function getAddrByHost($host, $timeout = 3) {
 		$host	= str_replace('http://', '', $host);
 		$query	= `nslookup -timeout=$timeout -retry=1 $host`;
-		if(preg_match('/\nAddress: (.*)\n/', $query, $matches))
-		   return trim($matches[1]);
+		if (preg_match('/\nAddress: (.*)\n/', $query, $matches)) {
+			return trim($matches[1]);
+		}
 		return $host;
 	}
 }
-?>

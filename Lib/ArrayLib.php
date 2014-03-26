@@ -117,7 +117,7 @@ class ArrayLib {
 		 * Using __FUNCTION__ (Magic constant)
 		 * for recursive call
 		 */
-			return array_map( array('ArrayLib','objectToArray') , $d);
+			return array_map( array('ArrayLib', 'objectToArray'), $d);
 		} else {
 			// Return array
 			return $d;
@@ -139,9 +139,8 @@ class ArrayLib {
 		 * Using __FUNCTION__ (Magic constant)
 		 * for recursive call
 		 */
-			return (object) array_map(array('ArrayLib','arrayToObject') , $d);
-		}
-		else {
+			return (object)array_map(array('ArrayLib', 'arrayToObject'), $d);
+		} else {
 			// Return object
 			return $d;
 		}
@@ -150,12 +149,13 @@ class ArrayLib {
 /**
  *
  * Take in either model.n or n.model and extract a preferred nested format also in
- either model.n or model.n format
+ * either model.n or model.n format
  * @param $data array of original search results
  * @param $options array. Keys are:
-  - from Required
-  - to Optional. Default value is the reverse of `from`
+ * - from Required
+ * - to Optional. Default value is the reverse of `from`
  * @return array Extracted array following the desired to indicated in $options
+ * @throws Exception when `from` is not set in $options
  */
 	public static function extractToNest($data, $options = array()) {
 		if (!isset($options['from'])) {

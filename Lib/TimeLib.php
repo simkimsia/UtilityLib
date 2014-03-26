@@ -29,10 +29,11 @@ class TimeLib {
 	const MYSQL_DATETIME		= 'MYSQL_DATETIME';
 	const ISO_8601_DATE		= 'ISO_8601_DATE';
 	const ISO_8601_DATETIME	= 'ISO_8601_DATETIME';
+
 /**
  * check whether right now is still not later than a given MySQL datetime value by a specific time interval
- * e.g. nowStillWithin('2013-09-09 00:00:00', '30 minutes') is asking whether right now is it 
- no later than 2013-09-09 00:30:00 
+ * e.g. nowStillWithin('2013-09-09 00:00:00', '30 minutes') is asking whether right now is it
+ * no later than 2013-09-09 00:30:00
  * @param $datatimeInMySQL string Expecting yyyy-mm-dd hh:mm:ss format
  * @param $intervalInString string Human-readable date string. E.g. 4 days
  * @return boolean Return true if still within the time period
@@ -70,8 +71,8 @@ class TimeLib {
  *
  * @param $value String. E.g., 3133-01-07 17:49:52
  * @param $options Array Contains the following keys:
-   - `from` String Required 1 of the 3 possible formats
-   - `to`	String Required 1 of the 3 possible formats
+ * - `from` String Required 1 of the 3 possible formats
+ * - `to`	String Required 1 of the 3 possible formats
  * @return String the new string of the desired format indicated in $options['to']
  */
 	public static function translate($value, $options = array()) {

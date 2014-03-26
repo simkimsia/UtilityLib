@@ -439,7 +439,7 @@ class StringLib {
  * @return int
  */
 	public static function countNewLines($subject) {
-		$linesArr = preg_split('/\r\n|\n\r|\n|\r/',$subject);
+		$linesArr = preg_split('/\r\n|\n\r|\n|\r/', $subject);
 		$numNewlines = count($linesArr);
 		return $numNewlines;
 	}

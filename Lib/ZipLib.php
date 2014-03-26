@@ -74,7 +74,7 @@ class ZipLib {
 			$files = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($source), RecursiveIteratorIterator::SELF_FIRST);
 
 			if ($includeDir) {
-				$arr = explode("/",$source);
+				$arr = explode("/", $source);
 				$count = count($arr);
 				$maindir = $arr[$count - 1];
 				$source = "";
@@ -119,7 +119,7 @@ class ZipLib {
  *
  * @return  boolean     Succesful or not
  */
-	public static function unzip($srcFile, $destDir=false, $createZipNameDir=true, $overwrite=true) {
+	public static function unzip($srcFile, $destDir = false, $createZipNameDir = true, $overwrite = true) {
 		$zip = zip_open($srcFile);
 		if ($zip) {
 			$splitter = ($createZipNameDir === true) ? "." : "/";
@@ -149,7 +149,7 @@ class ZipLib {
 				}
 
 				// Open the entry
-				if (zip_entry_open($zip,$zipEntry,"r")) {
+				if (zip_entry_open($zip, $zipEntry, "r")) {
 					// The name of the file to save on the disk
 					$fileUnderscoreName = $destDir . $name;
 
@@ -186,7 +186,7 @@ class ZipLib {
 	public static function createDirs($path) {
 		if (!is_dir($path)) {
 			$directoryPath = "";
-			$directories = explode("/",$path);
+			$directories = explode("/", $path);
 			array_pop($directories);
 			foreach ($directories as $directory) {
 				$directoryPath .= $directory . "/";

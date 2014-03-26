@@ -208,4 +208,40 @@ class StringLibTestCase extends CakeTestCase {
 		$this->assertEquals($expected, $result);
 	}
 
+/**
+ *
+ * test function countUpperCase
+ *
+ * @return void
+ */
+	public function testCountUpperCase() {
+		// GIVEN the following $subject
+		$subject = "Word1 Word2 ~!@#$%^&*()_+=-`1234567890";
+
+		// WHEN we run the substrToLastWord
+		$result = StringLib::countUpperCase($subject);
+
+		// THEN we expect 2 because of the W
+		$expected = 2;
+		$this->assertEquals($expected, $result);
+	}
+
+/**
+ *
+ * test function countUpperCase
+ *
+ * @return void
+ */
+	public function testCountLowerCase() {
+		// GIVEN the following $subject
+		$subject = "Word1 Word2 ~!@#$%^&*()_+=-`1234567890";
+
+		// WHEN we run the substrToLastWord
+		$result = StringLib::countLowerCase($subject);
+
+		// THEN we expect 6 because of the ord
+		$expected = 6;
+		$this->assertEquals($expected, $result);
+	}
+
 }

@@ -475,4 +475,30 @@ class StringLib {
 		return $subject;
 	}
 
+/**
+ *
+ * count UC in string
+ *
+ * Taken from http://stackoverflow.com/a/1557983
+ *
+ * @param $subject String The subject we are going to explode with
+ * @return int number of upper case letters
+ */
+	public static function countUpperCase($subject) {
+		return strlen(preg_replace('![^A-Z]+!', '', $subject));
+	}
+
+/**
+ *
+ * count LC in string
+ *
+ * Taken from http://stackoverflow.com/a/1557983
+ *
+ * @param $subject String The subject we are going to explode with
+ * @return int number of upper case letters
+ */
+	public static function countLowerCase($subject) {
+		return strlen(preg_replace('![^a-z]+!', '', $subject));
+	}
+
 }

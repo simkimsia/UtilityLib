@@ -170,12 +170,12 @@ class StringLibTestCase extends CakeTestCase {
 		$this->assertEquals($expected, count($result));
 
 		// AND the result is as follows
-		$expected = [
+		$expected = array(
 			"This is line 1",
 			"This is line 2",
 			"This is line 3",
 			"This is line 4"
-		];
+		);
 		$this->assertEquals($expected, $result);
 	}
 
